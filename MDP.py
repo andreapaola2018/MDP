@@ -6,7 +6,7 @@
 # Reward: Dictionary mapping with each state action pair 
 
 import numpy as np 
-import matplotlib
+# import matplotlib
 
 class mdp: 
 
@@ -16,7 +16,7 @@ class mdp:
             'RD10p', 'RD8a', 'RD10a',
             'ClassBegins']
 
-    actions = ['P', 'R', 'S', 'any']
+    actions = ['P', 'R', 'S', 'any', 'P1','P2']
     rewards = {'RU8p': {'P': 2, 'R': 0, 'S': -1},
             'RU10p': {'P1': 2, 'P2': 2, 'R': 0, 'S': -1},
             'RU8a': {'P': 2, 'R': 0, 'S': -1},
@@ -30,8 +30,8 @@ class mdp:
     }
     transition = {'RU8p': {'P': {'TU10p': 1.0 }, 'R': {'RU10p': 1.0},'S': {'RD10p': 1.0}},
                 'TU10p': {'P': {'RU10a': 1.0}, 'R': {'RU8a': 1.0}},
-                'RU10p': {'R':{'RU8a': 1.0}, 'P':{'RU8a': .5, 'RU10a': .5},'S': {'RD8a': 1.0}},
-                'RD10p': {'R': {'RD8a': 1.0}, 'P': {'RD8a': .5, 'RD10a': .5}}, 
+                'RU10p': {'R':{'RU8a': 1.0}, 'P1':{'RU8a': .5}, 'P2': {'RU10a': .5},'S': {'RD8a': 1.0}},
+                'RD10p': {'R': {'RD8a': 1.0}, 'P1': {'RD8a': .5}, 'P2': {'RD10a': .5}}, 
                 'RU8a': {'P': {'TU10a': 1.0}, 'R': {'RU10a': 1.0}, 'S': {'RD10a': 1.0}},
                 'RD8a': {'R': {'RD10a': 1.0}, 'P': {'TD10a': 1.0}}, 
                 'TU10a': {'any': {'ClassBegins': 1.0}},
