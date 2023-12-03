@@ -1,4 +1,5 @@
 import numpy as np 
+
 class mdp: 
 
     states = ['RU8p', 'RU10p','RU8a','RU10a',

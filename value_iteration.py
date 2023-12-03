@@ -1,11 +1,8 @@
 from MDP import mdp
 import numpy as np 
 import matplotlib.pyplot as plt
-mdp = mdp() 
 
-discount_rate = 0.99 
-
-def value_iteration(): 
+def value_iteration(mdp: mdp, discount_rate): 
     ##initialize all value estimates to 0 
     V = {s: 0 for s in mdp.states}
     state_iterations = {s: 0 for s in mdp.states}
@@ -13,6 +10,10 @@ def value_iteration():
         #compute the updated value function for each state 
         new_V = {}
         for s in mdp.states: 
+            if s == 'ClassBegins':
+                # Skip terminal state
+                new_V[s] = 0
+                continue
             values = []
             for a in mdp.actions: 
                 value = mdp.rewards[s].get(a, 0)  # Default to 0 if action not available in state     
@@ -47,36 +48,38 @@ def value_iteration():
                 return new_V, state_iterations
         V = new_V
 
-# ## maximum value function for each state
-# V = value_iteration() 
-V, state_iterations = value_iteration()
-print("\nFinal Values for Each State: ")
-print(V)
-print("\nNumber of Iterations For Each State:")
-for s, iterations in state_iterations.items(): 
-    print(f"{s}: {iterations}")
+def VI(mdp: mdp, discount_rate): 
+    ## maximum value function for each state
+    V, state_iterations = value_iteration(mdp, discount_rate)
+    print("\nFinal Values for Each State: ")
+    print(V)
+    print("\nNumber of Iterations For Each State:")
+    for s, iterations in state_iterations.items(): 
+        print(f"{s}: {iterations}")
 
-policy = {}
+    policy = {}
 
-for s in mdp.states: 
-    values = []
-    for a in mdp.actions: 
-        value = 0
-        if s in mdp.rewards and a in mdp.rewards[s]:
-            # If the action is defined in rewards for the state
-            value += mdp.rewards[s][a]
-        # value = mdp.rewards[s][a] # Default to 0 if action not available in state
-        for s2 in mdp.states: 
-            if s in mdp.states and a in mdp.actions and s2 in mdp.states: 
-                if a in mdp.transition[s] and s2 in mdp.transition[s][a]: 
-                    value += discount_rate * mdp.transition[s][a][s2] * V[s2]
-        values.append(value)
+    for s in mdp.states: 
+        if s != 'ClassBegins':
+            values = []
+            for a in mdp.actions: 
+                value = 0
+                if s in mdp.rewards and a in mdp.rewards[s]:
+                    # If the action is defined in rewards for the state
+                    value += mdp.rewards[s][a]
+                # value = mdp.rewards[s][a] # Default to 0 if action not available in state
+                for s2 in mdp.states: 
+                    if s in mdp.states and a in mdp.actions and s2 in mdp.states: 
+                        if a in mdp.transition[s] and s2 in mdp.transition[s][a]: 
+                            value += discount_rate * mdp.transition[s][a][s2] * V[s2]
+                values.append(value)
 
-    if s == 'TU10a' or s == 'RU10a': 
-       policy[s] = mdp.actions[3]
-    else: 
-        policy[s] = mdp.actions[np.argmax(values)] ##maximum of actions 
+            if s == 'TU10a' or s == 'RU10a': 
+                policy[s] = mdp.actions[3]
+            else: 
+                policy[s] = mdp.actions[np.argmax(values)] ##maximum of actions 
 
-# Print the final optimal policy
-print('\nFinal Optimal Policy:')
-print(policy)
+    # Print the final optimal policy
+    print('\nFinal Optimal Policy:')
+    print(policy)
+

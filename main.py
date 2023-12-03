@@ -1,11 +1,14 @@
 import sys
-
+from value_iteration import * 
+from MDP import mdp
 def runAlgorithm(algorithm): 
     if algorithm == "MC": 
         print("MC")
         pass
     elif algorithm == "VI": 
-        pass
+        m = mdp()
+        lambda_value = 0.99 
+        VI(m, lambda_value)
     elif algorithm == "QL": 
         pass
 
