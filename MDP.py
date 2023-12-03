@@ -1,13 +1,4 @@
-
-# Problem: Student and the decisions one must make to both have a 
-# good and remain in good academic standing 
-# States: R, T, D, U, 8p
-# Actions: P, R, S, any 
-# Reward: Dictionary mapping with each state action pair 
-
 import numpy as np 
-# import matplotlib
-
 class mdp: 
 
     states = ['RU8p', 'RU10p','RU8a','RU10a',
