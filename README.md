@@ -26,4 +26,5 @@ This method performs Monte Carlo First Visit method using an alpha (learning rat
 This method performs value iteration using a discount rate (lambda) of 0.99 to iterate through the MDP and compute the value functions of each state and the final optimal policy of each state. 
 
 ### Q-Learning
+The Q-learning method runs episodes repeatedly until the maximum change in any Q-value of a state-action pair is less than 0.001. The learning rate that was used was 0.2 and a discount rate (lambda) of 0.99 was also used. This is all used to find the optimal policy for the MDP. 
 
