@@ -1,6 +1,4 @@
-import numpy as np 
-
-class mdp: 
+class mdp_vi: 
 
     states = ['RU8p', 'RU10p','RU8a','RU10a',
             'TU10p', 'TU10a',
