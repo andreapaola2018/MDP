@@ -2,7 +2,7 @@ from MDP_ql import mdp_ql
 import numpy as np
 
 class QLearning: 
-    def __init__(self, mdp, alpha=0.2, gamma=0.99, epsilon=0.001): 
+    def __init__(self, mdp: mdp_ql, alpha=0.2, gamma=0.99, epsilon=0.001): 
         self.mdp = mdp
         self.alpha = alpha
         self.gamma = gamma ##discount rate

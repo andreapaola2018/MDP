@@ -1,8 +1,7 @@
-from MDP import mdp
-import numpy as np 
-import matplotlib.pyplot as plt
+from MDP_vi import mdp_vi
+import numpy as np
 
-def value_iteration(mdp: mdp, discount_rate): 
+def value_iteration(mdp: mdp_vi, discount_rate): 
     ##initialize all value estimates to 0 
     V = {s: 0 for s in mdp.states}
     state_iterations = {s: 0 for s in mdp.states}
@@ -48,7 +47,7 @@ def value_iteration(mdp: mdp, discount_rate):
                 return new_V, state_iterations
         V = new_V
 
-def VI(mdp: mdp, discount_rate): 
+def VI(mdp: mdp_vi, discount_rate): 
     ## maximum value function for each state
     V, state_iterations = value_iteration(mdp, discount_rate)
     print("\nFinal Values for Each State: ")
@@ -82,4 +81,3 @@ def VI(mdp: mdp, discount_rate):
     # Print the final optimal policy
     print('\nFinal Optimal Policy:')
     print(policy)
-

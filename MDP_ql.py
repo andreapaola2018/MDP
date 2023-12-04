@@ -28,10 +28,6 @@ class mdp_ql:
                 'RD10a': {'any': ['ClassBegins', 4]},
                 'TD10a': {'any': ['ClassBegins', 3]}
     }
-    
-    # returns an action at random from the given state
-    def chooseActionFromState(self, state: str) -> str:
-        return np.random.choice(self.statesAndActions[state])
 
     # given a state, takes the action specified
     def takeAction(self, state: str, action: str) -> (str, int):
@@ -40,7 +36,6 @@ class mdp_ql:
             return possibleTransitions[0], possibleTransitions[1]
         ranState = np.random.randint(0,2)
         return possibleTransitions[ranState], possibleTransitions[2]
-        
 
     # return true iff the given state is a terminal state
     def isTerminalState(self, state: str) -> bool:
